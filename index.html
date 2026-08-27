@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>텍스트 시침질</title>
+  <link rel="stylesheet" href="https://use.typekit.net/gnq5kvg.css">
+  <!-- 버전 쿼리로 브라우저 CSS/JS 캐시를 갱신 (수정 시 버전 번호 증가) -->
+  <link rel="stylesheet" href="style.css?v=51">
+  <!-- 외부 CSS 캐시와 무관하게 본문 텍스트 박스의 핵심 크기를 강제 고정 -->
+  <style>
+    .artboard-content {
+      position: absolute;
+      width: 35.3553vw;      /* 텍스트박스 원복 */
+      height: auto;          /* 본문 전체 출력 */
+      min-height: 17.6777vh; /* 텍스트박스 원복 */
+      overflow: visible;     /* 세로 넘침 허용 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="canvas-wrapper">
+    <!-- A4 가로 비율 규격 아트보드 (297 : 210) -->
+    <div class="a4-artboard">
+      <!-- 본문 텍스트 (최초 출력은 artboard.js에서 텍스트 시침질 랜덤 인용문으로 교체됨) -->
+      <div class="artboard-content" id="contentText">
+        텍스트 시침질
+      </div>
+
+      <!-- 확정 버튼 (본문과 동일한 합성 글꼴 포맷) -->
+      <button class="swiss-btn" id="confirmBtn" type="button">엮기 &rarr;</button>
+    </div>
+  </div>
+
+  <!-- 모듈 스크립트 연동 -->
+  <script src="compositeFont.js?v=51"></script>
+  <!-- 텍스트 시침질.rtf 에서 추출한 인용문(제목+본문) 배열 -->
+  <script src="rtf_citations.js?v=51"></script>
+  <script src="wikiCrawler.js?v=51"></script>
+  <script src="artboard.js?v=51"></script>
+  <script src="app.js?v=51"></script>
+</body>
+</html>

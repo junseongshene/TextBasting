@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'SM3세명조';
+  src: url('Fonts/SM3세명조.ttf') format('truetype'),
+       url('Fonts/SM3세명조.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SM3나루';
+  src: url('Fonts/SM3나루.ttf') format('truetype'),
+       url('Fonts/SM3나루.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OnulSuisse';
+  src: url('Fonts/OnulSuisse.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   인디자인 합성 글꼴 (Composite Fonts) 세팅
+   --------------------------------------------------------------------------
+   1. 구두점, 기호: SM3세명조 / 크기 100% / 기준선 0% / 세로 100% / 가로 100%
+   2. 한글:        SM3세명조 / 크기 100% / 기준선 0% / 세로 100% / 가로 97%
+   3. 라틴 문자:    SM3나루   / 크기 85%  / 기준선 5% / 세로 100% / 가로 95%
+   4. 숫자:        Fort Light / 크기 95%  / 기준선 1% / 세로 100% / 가로 90%
+   ========================================================================== */
+
+.comp-punct {
+  font-family: 'SM3세명조', 'OnulSuisse', serif;
+  font-size: 100%;
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+.comp-hangul {
+  font-family: 'SM3세명조', serif;
+  font-size: 100%;
+  vertical-align: baseline;
+  display: inline-block;
+  transform: scaleX(0.97);
+  transform-origin: center center;
+}
+
+.comp-latin {
+  font-family: 'SM3나루', sans-serif;
+  font-size: 85%;
+  display: inline-block;
+  transform: scaleX(0.95) translateY(-0.05em);
+  transform-origin: center center;
+  vertical-align: baseline;
+}
+
+.comp-number {
+  font-family: 'fort', sans-serif;
+  font-weight: 300;
+  font-size: 95%;
+  display: inline-block;
+  transform: scaleX(0.90) translateY(-0.01em);
+  transform-origin: center center;
+  vertical-align: baseline;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 회색 빈 공간/스크롤 제거, 창 자체가 A4 종이 */
+}
+
+body {
+  background-color: #ffffff; /* 창 자체가 흰 A4 종이 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'SM3세명조', 'OnulSuisse', serif, sans-serif;
+  color: #000000;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* A4 가로 규격 아트보드 (297 : 210) - 창 전체를 채워 회색 빈 공간 제거 */
+.a4-artboard {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* 내지(페이지 안쪽)는 검정 10% opacity 회색, 가장자리 4.5mm는 흰색 마진 */
+  background-color: rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 0 0 2mm #ffffff;
+  padding: 5.5cqw 5.5cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 본문만 남으므로 세로 중앙 정렬 */
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+/* 확정 버튼 - 본문과 동일한 합성 글꼴 포맷, 우하단 고정 */
+.swiss-btn {
+  position: absolute;
+  bottom: 4cqw;
+  right: 4cqw;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4cqw;
+  font-family: 'SM3세명조', 'OnulSuisse', serif; /* 본문과 동일 */
+  font-size: 2.0cqw; /* 본문과 동일 */
+  line-height: 1.55;
+  letter-spacing: -0.01em; /* 본문과 동일 */
+  color: #000000;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #000000; /* 텍스트 버튼 느낌 */
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.swiss-btn:hover {
+  color: #888888;
+  border-bottom-color: #888888;
+}
+
+/* 내용 영역 - 본문 전체를 출력, 폰트 절반, 인디자인 양쪽정렬(마지막 줄 왼끝정렬 균등배치) */
+.artboard-content {
+  position: absolute;
+  width: 35.3553vw;      /* 텍스트박스 원복 */
+  height: auto;          /* 본문 전체를 출력하도록 높이 자동 */
+  min-height: 17.6777vh; /* 텍스트박스 원복 */
+  font-size: clamp(10.8px, 1.15cqw, 21.6px); /* 적응형: 원래(12px,1.28cqw,24px)의 90% */
+  line-height: 1.9;     /* 기존 1.55의 1.6배 */
+  letter-spacing: -0.01em;
+  text-align: justify;       /* 인디자인 양끝정렬(마지막 줄 제외) */
+  text-align-last: left;     /* 마지막 줄 왼끝정렬 */
+  text-justify: inter-character; /* CJK 문자 간격 균등 배치 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  overflow: visible; /* 세로 넘침 허용 (모든 본문 표시) */
+  cursor: text;
+  user-select: text;
+}
+
+.artboard-content::selection {
+  background-color: #000000;
+  color: #ffffff;
+}
